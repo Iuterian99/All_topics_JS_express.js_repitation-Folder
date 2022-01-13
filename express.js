@@ -1,21 +1,10 @@
-// const http = require("http");
-// const express = require("express");
-// const app = express();
-// app.use((req, res, next) => {
-//   console.log("first express use");
-// });
-
-// const server = http.createServer(app);
-
-// server.listen(3000, console.log(3000));
-
-const cars = [
-  { model: "x5", brand: "BMW", engine: 5 },
-  { model: "model s", brand: "Tesla", engine: 8 },
-  { model: "Gentra", brand: "Ravon", engine: 1.5 },
-  { model: "Malibu", brand: "GM", engine: 3 },
-  { model: "222", brand: "mercedes", engine: 6 },
-];
+// const cars = [
+//   { model: "x5", brand: "BMW", engine: 5 },
+//   { model: "model s", brand: "Tesla", engine: 8 },
+//   { model: "Gentra", brand: "Ravon", engine: 1.5 },
+//   { model: "Malibu", brand: "GM", engine: 3 },
+//   { model: "222", brand: "mercedes", engine: 6 },
+// ];
 
 // const carsArr = [];
 //!-------------------------------------------- for() -----------------------------------------------------
@@ -84,10 +73,62 @@ filter() array.filter() arraydagi elementini aylanib call back funksiyasida beri
 // console.log(carEngine);
 
 //!-------------------------------------- join() ---------------------------------------------------------
+/*
+join() The join() method creates and returns a new string by concatenating all of the elements in an array (or an array-like object), separated by commas or a specified separator string. If the array has only one item, then that item will be returned without using the separator.
+*/
+// const a = ["wind", "water", "fire"];
 
-const a = ["wind", "water", "fire"];
+// console.log(a.join()); //wind,water,fire
+// console.log(a.join(" , ")); // wind , water , fire
+// console.log(a.join(" + ")); //wind + water + fire
+// console.log(a.join("")); // windwaterfire
 
-console.log(a.join()); //wind,water,fire
-console.log(a.join(" , ")); // wind , water , fire
-console.log(a.join(" + ")); //wind + water + fire
-console.log(a.join("")); // windwaterfire
+// const http = require("http");
+// const express = require("express");
+// const app = express();
+// app.use((req, res, next) => {
+//   console.log("first express use");
+// });
+
+// const server = http.createServer(app);
+
+// const express = require("express");
+// const app = express();
+// const port = 8000;
+
+// app.listen(port, () => {
+//   console.log(`your port${port} is running on https://localhost:${port}`);
+// });
+
+//!--------------------------------------- Cookies ------------------------------------------------------
+/*
+!we shou type in cmd or terminal ->"npm i cookie-parser"
+https cookies are small pieces of data that is sent back from the server to the web browser which web brawser stores these cookies which allow subsequent requests made to the server to exchange the cookie for piece of information. cookies have an expiration date once expired the cookie will no longer be sent to the server whenever a request is made!
+http is stateless. Every request made to the server from a client is independent from each other. So information about requests made prevously cannot be obtained during the current request. Thus, cookies exist. We use cookies to keep track of requests, activity from a user, maintaining logged in users, keeping track of items in a user`s shopping card.
+!cookies live on the browser(client-side). 
+*/
+
+const express = require("express");
+const cookieParser = require("cookie-parser"); //! we should call it
+
+const app = express();
+
+app.use(cookieParser()); //! it is built-in Middleware which we should call it in app.use()
+app.use(express.json());
+const port = 9999;
+
+const post = [
+  {
+    title: "my favourite cars",
+  },
+  {
+    title: "my favourite books",
+  },
+];
+
+app.get("/signin", (req, res) => {
+  res.cookie("session_id", "123");
+  // res.server(200).
+});
+
+app.listen(port, console.log(`https:://localhost:${port}`));
