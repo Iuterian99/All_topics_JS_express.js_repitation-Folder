@@ -108,27 +108,53 @@ http is stateless. Every request made to the server from a client is independent
 !cookies live on the browser(client-side). 
 */
 
+// const express = require("express");
+// const cookieParser = require("cookie-parser"); //! we should call it
+
+// const app = express();
+
+// app.use(cookieParser()); //! it is built-in Middleware which we should call it in app.use()
+// app.use(express.json());
+// const port = 9999;
+
+// function validateCookies(req, res, next){
+//   const { cookies } = req;
+//   console.log(cookies);
+//   next()
+
+// }
+
+// app.get("/signin", validateCookies, (req, res) => {
+//   res.cookie("session_id", "123");
+//   res.status(200).json({msg: "logged in"})
+// });
+
+// app.listen(port, console.log(`https:://localhost:${port}`));
+
+//! ---------------------------------- Udemy Backend(Lesson9) --------------------------------------------
 const express = require("express");
-const cookieParser = require("cookie-parser"); //! we should call it
-
 const app = express();
-
-app.use(cookieParser()); //! it is built-in Middleware which we should call it in app.use()
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded());
 app.use(express.json());
-const port = 9999;
 
-const post = [
-  {
-    title: "my favourite cars",
-  },
-  {
-    title: "my favourite books",
-  },
-];
+app.use("/login", (req, res, next) => {
+  console.log("hi");
 
-app.get("/signin", (req, res) => {
-  res.cookie("session_id", "123");
-  // res.server(200).
+  res.send(
+    `<form action="/user" method="POST"><input type="text" name="title"><button type="submit">submit</button></form>`
+  );
 });
 
-app.listen(port, console.log(`https:://localhost:${port}`));
+app.use("/user", (req, res, next) => {
+  console.log(req.body);
+
+  res.redirect("/");
+});
+
+app.use("/", (req, res, next) => {
+  console.log("I`m from '/' part");
+  res.send(`<h1>u are a user</h1>`);
+});
+
+app.listen(9000, console.log(9000));
