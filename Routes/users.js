@@ -4,7 +4,7 @@ const router = express.Router();
 router.post("/user", (req, res, next) => {
   console.log(req.body);
 
-  res.redirect("/");
+  res.redirect("/posts");
 });
 
 module.exports = router;

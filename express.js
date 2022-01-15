@@ -33,19 +33,17 @@ http is stateless. Every request made to the server from a client is independent
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const users = require("./Routes/users");
+const posts = require("./Routes/posts");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-const users = require("./Routes/users");
 app.use(users);
+app.use(posts);
 
 app.use("/login", (req, res, next) => {
   res.send(
     `<form action="/user" method="POST"><input type="text" name="name"><button type="submit">submit</button></form>`
   );
-});
-
-app.use("/", (req, res, next) => {
-  res.send(`<h1>u are a user</h1>`);
 });
 
 app.listen(9000, console.log(9000));
