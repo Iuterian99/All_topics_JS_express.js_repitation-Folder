@@ -40,9 +40,10 @@ const posts = require("./Routes/posts");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(login);
 app.use("/login", users); //-->har bitta users faylidagi route oldidan "/login" routeni qo`shib qo`yadi!
 app.use("/login/users/", posts); //-->har bitta posts faylidagi route oldidan "/login/users/" routeni qo`shadi
-app.use(login);
+//! The same path(route) can be used if the method is different
 
 app.use("/", (req, res, next) => {
   res.status(404).send(`<h1>Page not found</h1>`);
